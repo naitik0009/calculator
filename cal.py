@@ -28,7 +28,8 @@ def capture(event):
 
 root = Tk()
 root.title("Calculator")
-root.geometry("228x187")
+root.minsize(228,187)
+root.maxsize(228,187)
 root.call('wm','iconphoto',root._w,PhotoImage(file='1.png'))
 filemenu = Menu(root)
 filemenu.add_command(label="About",command=about)
