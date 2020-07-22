@@ -1,0 +1,103 @@
+from tkinter import *
+import tkinter.messagebox as message
+from PIL import *
+def about():
+    message.showinfo("About","simple calculator v1.0\nmade by jack")
+def capture(event):
+    global screen
+    word = event.widget.cget("text")
+    if word == "=":
+        if screen.get().isdigit():
+            value = float(screen.get())
+
+        else:
+            try:
+                value = eval(screen.get())
+            except Exception as e:
+                value = "error"
+
+        screen.set(value)
+        screens.update()
+    elif word == "C":
+        screen.set("")
+        screens.update()
+    else:
+        screen.set(screen.get()+word)
+        screens.update()
+
+
+root = Tk()
+root.title("Calculator")
+root.geometry("228x187")
+root.call('wm','iconphoto',root._w,PhotoImage(file='1.png'))
+filemenu = Menu(root)
+filemenu.add_command(label="About",command=about)
+
+screen = StringVar()
+screen.set("")
+screens = Entry(root,textvar=screen,font="lucida 20 bold")
+screens.pack(fill='x',pady=5)
+frames = Frame(root)
+btn = Button(frames,text='7',font="lucida 14 bold")
+btn.pack(side=LEFT,padx=2)
+btn.bind("<Button-1>",capture)
+btn = Button(frames,text='8',font="lucida 14 bold")
+btn.pack(side=LEFT,padx=2)
+btn.bind("<Button-1>",capture)
+btn = Button(frames,text='9',font="lucida 14 bold")
+btn.pack(side=LEFT,padx=2)
+btn.bind("<Button-1>",capture)
+btn = Button(frames,text='C',font="lucida 14 bold")
+btn.pack(side=LEFT,padx=2)
+btn.bind("<Button-1>",capture)
+btn = Button(frames,text='=',font="lucida 14 bold")
+btn.pack(side=LEFT,padx=2)
+btn.bind("<Button-1>",capture)
+frames.pack(anchor="w")
+frames = Frame(root)
+btn = Button(frames,text='4',font="lucida 14 bold")
+btn.pack(side=LEFT,padx=2)
+btn.bind("<Button-1>",capture)
+btn = Button(frames,text='5',font="lucida 14 bold")
+btn.pack(side=LEFT,padx=2)
+btn.bind("<Button-1>",capture)
+btn = Button(frames,text='6',font="lucida 14 bold")
+btn.pack(side=LEFT,padx=2)
+btn.bind("<Button-1>",capture)
+btn = Button(frames,text='*',font="lucida 14 bold")
+btn.pack(side=LEFT,padx=2)
+btn.bind("<Button-1>",capture)
+btn = Button(frames,text='/',font="lucida 14 bold")
+btn.pack(side=LEFT,padx=7.5)
+btn.bind("<Button-1>",capture)
+frames.pack(anchor="w")
+frames = Frame(root)
+btn = Button(frames,text='1',font="lucida 14 bold")
+btn.pack(side=LEFT,padx=2)
+btn.bind("<Button-1>",capture)
+btn = Button(frames,text='2',font="lucida 14 bold")
+btn.pack(side=LEFT,padx=2)
+btn.bind("<Button-1>",capture)
+btn = Button(frames,text='3',font="lucida 14 bold")
+btn.pack(side=LEFT,padx=2)
+btn.bind("<Button-1>",capture)
+btn = Button(frames,text='-',font="lucida 14 bold")
+btn.pack(side=LEFT,padx=3)
+btn.bind("<Button-1>",capture)
+btn = Button(frames,text='+',font="lucida 15 bold")
+btn.pack(side=LEFT,padx=3)
+btn.bind("<Button-1>",capture)
+frames.pack(anchor="w")
+frame = Frame(root)
+btn = Button(frame,text="0",font="lucida 14 bold")
+btn.bind("<Button-1>",capture)
+btn.pack(side=LEFT)
+btn = Button(frame,text="00",font="lucida 14 bold")
+btn.bind("<Button-1>",capture)
+btn.pack(side=LEFT)
+btn = Button(frame,text=".",font="lucida 14 bold")
+btn.bind("<Button-1>",capture)
+btn.pack(side=LEFT)
+frame.pack(anchor="w")
+root.config(background="black",menu=filemenu)
+root.mainloop()
